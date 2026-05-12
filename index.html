@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technician Power – AC Services Mumbai</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ice: #C8F0F8;
+    --deep: #0A1628;
+    --blue: #1565C0;
+    --sky: #29B6F6;
+    --accent: #FF6B00;
+    --white: #FFFFFF;
+    --grey: #8899AA;
+    --card-bg: rgba(255,255,255,0.04);
+    --border: rgba(200,240,248,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ───── NOISE OVERLAY ───── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .4;
+  }
+
+  /* ───── NAV ───── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 18px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-icon {
+    width: 42px; height: 42px; background: linear-gradient(135deg, var(--sky), var(--blue));
+    border-radius: 10px; display: grid; place-items: center; font-size: 22px;
+    box-shadow: 0 4px 20px rgba(41,182,246,0.4);
+  }
+  .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); line-height: 1; }
+  .logo-sub { font-size: 10px; color: var(--sky); letter-spacing: 3px; display: block; }
+
+  .nav-links { display: flex; gap: 30px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px;
+    font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--sky); }
+  .nav-cta {
+    background: var(--accent); color: var(--white); padding: 10px 22px;
+    border-radius: 6px; font-weight: 600; font-size: 13px;
+    text-decoration: none; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.4);
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,0,0.5); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
+
+  /* ───── SECTIONS RESET ───── */
+  section { position: relative; z-index: 1; }
+
+  /* ───── HERO ───── */
+  #home {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 5% 80px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(21,101,192,0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(41,182,246,0.12) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(41,182,246,0.1); border: 1px solid rgba(41,182,246,0.3);
+    padding: 6px 16px; border-radius: 100px; font-size: 12px;
+    color: var(--sky); letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 24px; width: fit-content;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 7vw, 90px);
+    line-height: .95; letter-spacing: 2px;
+    animation: fadeUp .8s .1s ease both;
+  }
+  h1 em { font-style: normal; color: var(--sky); }
+  h1 span { color: var(--accent); }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.65); font-size: 16px; line-height: 1.7;
+    margin: 24px 0 36px; max-width: 480px;
+    animation: fadeUp .8s .2s ease both;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp .8s .3s ease both; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    color: var(--white); padding: 14px 30px; border-radius: 8px;
+    font-weight: 600; text-decoration: none; font-size: 15px;
+    box-shadow: 0 8px 30px rgba(41,182,246,0.35);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(41,182,246,0.5); }
+  .btn-ghost {
+    border: 1px solid var(--border); color: var(--white); padding: 14px 30px;
+    border-radius: 8px; font-weight: 500; text-decoration: none; font-size: 15px;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-ghost:hover { border-color: var(--sky); background: rgba(41,182,246,0.08); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 50px;
+    animation: fadeUp .8s .4s ease both;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--sky);
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* AC Illustration */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeUp .8s .2s ease both;
+  }
+  .ac-unit {
+    width: 320px; height: 320px; position: relative;
+  }
+  .ac-body {
+    width: 280px; height: 120px;
+    background: linear-gradient(180deg, #1E3A5F 0%, #0D2137 100%);
+    border-radius: 16px; position: absolute; top: 60px; left: 20px;
+    border: 1px solid rgba(41,182,246,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(41,182,246,0.1) inset,
+                0 0 80px rgba(41,182,246,0.08);
+    overflow: hidden;
+  }
+  .ac-vents {
+    display: flex; gap: 8px; padding: 20px 24px;
+  }
+  .ac-vent {
+    flex: 1; height: 6px; background: rgba(41,182,246,0.2);
+    border-radius: 3px; position: relative; overflow: hidden;
+  }
+  .ac-vent::after {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(41,182,246,0.6), transparent);
+    animation: shimmer 2s infinite;
+  }
+  .ac-vent:nth-child(2)::after { animation-delay: .3s; }
+  .ac-vent:nth-child(3)::after { animation-delay: .6s; }
+  .ac-vent:nth-child(4)::after { animation-delay: .9s; }
+  .ac-vent:nth-child(5)::after { animation-delay: 1.2s; }
+  @keyframes shimmer { to { left: 100%; } }
+  .ac-display {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 24px;
+  }
+  .ac-temp { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--sky); }
+  .ac-mode { font-size: 10px; color: var(--grey); letter-spacing: 2px; text-transform: uppercase; }
+  .ac-power {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(41,182,246,0.15); border: 1px solid var(--sky);
+    display: grid; place-items: center; font-size: 14px;
+    box-shadow: 0 0 12px rgba(41,182,246,0.4); cursor: default;
+  }
+
+  .cold-air {
+    position: absolute; top: 40px; left: 0; width: 100%;
+    display: flex; justify-content: center; gap: 20px;
+  }
+  .air-wave {
+    width: 2px; height: 60px;
+    background: linear-gradient(180deg, transparent, rgba(41,182,246,0.4), transparent);
+    border-radius: 2px;
+    animation: airflow 2s ease-in-out infinite;
+  }
+  .air-wave:nth-child(2) { animation-delay: .4s; height: 80px; }
+  .air-wave:nth-child(3) { animation-delay: .8s; }
+  .air-wave:nth-child(4) { animation-delay: 1.2s; height: 70px; }
+  .air-wave:nth-child(5) { animation-delay: 1.6s; }
+  @keyframes airflow { 0%,100%{transform:scaleY(.3);opacity:.3} 50%{transform:scaleY(1);opacity:1} }
+
+  /* ───── SECTION SHARED ───── */
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-tag {
+    display: inline-block; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--sky);
+    background: rgba(41,182,246,0.08); border: 1px solid rgba(41,182,246,0.2);
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 5vw, 64px);
+    letter-spacing: 2px; line-height: 1;
+  }
+  h2 em { font-style: normal; color: var(--sky); }
+  .section-sub { color: var(--grey); font-size: 15px; margin-top: 12px; max-width: 500px; margin-inline: auto; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+  /* ───── SERVICES ───── */
+  #services { padding: 100px 0; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;
+  }
+  .service-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+    cursor: default;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(41,182,246,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(41,182,246,0.08);
+  }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(41,182,246,0.2), rgba(21,101,192,0.2));
+    border: 1px solid rgba(41,182,246,0.2);
+    display: grid; place-items: center; font-size: 26px; margin-bottom: 20px;
+  }
+  .service-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+  .service-card p { color: var(--grey); font-size: 14px; line-height: 1.7; }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--sky); font-size: 13px; font-weight: 500;
+    margin-top: 16px; text-decoration: none;
+    transition: gap .2s;
+  }
+  .service-link:hover { gap: 10px; }
+
+  /* ───── WHY US ───── */
+  #why { padding: 100px 0; background: rgba(255,255,255,0.02); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-image {
+    background: linear-gradient(135deg, rgba(21,101,192,0.15), rgba(41,182,246,0.08));
+    border: 1px solid var(--border); border-radius: 20px;
+    height: 420px; display: flex; align-items: center; justify-content: center;
+    font-size: 80px; position: relative; overflow: hidden;
+  }
+  .why-image::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(41,182,246,0.15) 0%, transparent 70%);
+  }
+  .why-points { display: flex; flex-direction: column; gap: 28px; }
+  .why-point { display: flex; gap: 16px; align-items: flex-start; }
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--sky);
+    opacity: .3; line-height: 1; min-width: 40px;
+  }
+  .why-point h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .why-point p { color: var(--grey); font-size: 14px; line-height: 1.6; }
+
+  /* ───── BRANDS ───── */
+  #brands { padding: 100px 0; }
+  .brands-strip {
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+    margin-top: 40px;
+  }
+  .brand-pill {
+    background: var(--card-bg); border: 1px solid var(--border);
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7);
+    transition: border-color .3s, color .3s, transform .3s;
+  }
+  .brand-pill:hover {
+    border-color: var(--sky); color: var(--white); transform: scale(1.05);
+  }
+
+  /* ───── PROCESS ───── */
+  #process { padding: 100px 0; background: rgba(255,255,255,0.02); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    position: relative; margin-top: 60px;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute; top: 36px; left: 12.5%; right: 12.5%;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--sky), transparent);
+  }
+  .step { text-align: center; padding: 0 20px; }
+  .step-num {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, var(--blue), rgba(41,182,246,0.3));
+    border: 1px solid rgba(41,182,246,0.4);
+    border-radius: 50%; display: grid; place-items: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--sky);
+    margin: 0 auto 20px; box-shadow: 0 0 30px rgba(41,182,246,0.2);
+  }
+  .step h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .step p { color: var(--grey); font-size: 13px; line-height: 1.6; }
+
+  /* ───── TESTIMONIALS ───── */
+  #testimonials { padding: 100px 0; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testimonial-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+    transition: border-color .3s;
+  }
+  .testimonial-card:hover { border-color: rgba(41,182,246,0.3); }
+  .stars { color: #FFB300; font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+  .testimonial-text { color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    display: grid; place-items: center; font-weight: 700; font-size: 14px;
+  }
+  .author-name { font-weight: 600; font-size: 14px; }
+  .author-loc { color: var(--grey); font-size: 12px; }
+
+  /* ───── PRICING ───── */
+  #pricing { padding: 100px 0; background: rgba(255,255,255,0.02); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pricing-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: 36px; text-align: center;
+    transition: transform .3s; position: relative;
+  }
+  .pricing-card.featured {
+    border-color: rgba(41,182,246,0.5);
+    background: linear-gradient(180deg, rgba(41,182,246,0.08) 0%, var(--card-bg) 100%);
+    box-shadow: 0 0 60px rgba(41,182,246,0.1);
+  }
+  .popular-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--sky); color: var(--deep); padding: 4px 16px;
+    border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .pricing-card:hover { transform: translateY(-6px); }
+  .plan-name { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-bottom: 12px; }
+  .plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--white); line-height: 1; }
+  .plan-price sup { font-size: 24px; vertical-align: super; }
+  .plan-price small { font-size: 16px; color: var(--grey); font-family: 'DM Sans', sans-serif; }
+  .plan-features { list-style: none; margin: 24px 0; text-align: left; display: flex; flex-direction: column; gap: 10px; }
+  .plan-features li { font-size: 14px; color: rgba(255,255,255,0.75); display: flex; align-items: center; gap: 10px; }
+  .plan-features li::before { content: '✓'; color: var(--sky); font-weight: 700; }
+  .btn-plan {
+    width: 100%; padding: 14px; border-radius: 10px; font-weight: 600;
+    font-size: 15px; cursor: pointer; text-decoration: none; display: block;
+    border: 1px solid rgba(41,182,246,0.3); color: var(--white);
+    background: transparent; transition: .3s;
+  }
+  .btn-plan.filled {
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    border: none; box-shadow: 0 8px 30px rgba(41,182,246,0.35);
+  }
+  .btn-plan:hover { opacity: .85; }
+
+  /* ───── CONTACT ───── */
+  #contact { padding: 100px 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start; }
+  .contact-info h3 { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 2px; margin-bottom: 16px; }
+  .contact-info p { color: var(--grey); font-size: 15px; line-height: 1.7; margin-bottom: 36px; }
+  .info-items { display: flex; flex-direction: column; gap: 20px; }
+  .info-item { display: flex; gap: 14px; align-items: flex-start; }
+  .info-ico {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: rgba(41,182,246,0.1); border: 1px solid rgba(41,182,246,0.2);
+    display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
+  }
+  .info-item strong { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: var(--grey); display: block; margin-bottom: 3px; }
+  .info-item span { font-size: 15px; color: var(--white); }
+  .info-item a { color: var(--sky); text-decoration: none; }
+
+  .contact-form {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 16px; }
+  label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--grey); display: block; margin-bottom: 8px; }
+  input, select, textarea {
+    width: 100%; padding: 13px 16px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--white); font-family: 'DM Sans', sans-serif;
+    font-size: 15px; outline: none; transition: border-color .2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--sky); }
+  select option { background: var(--deep); }
+  textarea { resize: vertical; min-height: 120px; }
+  .btn-submit {
+    width: 100%; padding: 15px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--sky), var(--blue));
+    border: none; color: var(--white); font-size: 16px;
+    font-weight: 600; cursor: pointer; transition: .3s;
+    box-shadow: 0 8px 30px rgba(41,182,246,0.35);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-submit:hover { box-shadow: 0 12px 40px rgba(41,182,246,0.5); transform: translateY(-2px); }
+  .wa-note { font-size: 12px; color: var(--grey); text-align: center; margin-top: 12px; }
+  .wa-note span { color: #25D366; }
+
+  /* ───── FOOTER ───── */
+  footer {
+    padding: 60px 5% 30px;
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+  footer p { color: var(--grey); font-size: 14px; line-height: 1.7; margin: 16px 0 20px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { color: var(--grey); text-decoration: none; font-size: 14px; transition: color .2s; }
+  .footer-links a:hover { color: var(--sky); }
+  .footer-col h4 { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+  .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { color: var(--grey); font-size: 13px; margin: 0; }
+  .social-links { display: flex; gap: 12px; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--card-bg); border: 1px solid var(--border);
+    display: grid; place-items: center; text-decoration: none;
+    font-size: 16px; transition: border-color .2s, transform .2s;
+  }
+  .social-link:hover { border-color: var(--sky); transform: translateY(-2px); }
+
+  /* ───── FLOATING WA ───── */
+  .float-wa {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #25D366;
+    display: grid; place-items: center; font-size: 28px;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+    text-decoration: none;
+    transition: transform .2s;
+    animation: bounce 3s 2s ease infinite;
+  }
+  .float-wa:hover { transform: scale(1.1); }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* ───── MOBILE NAV ───── */
+  .mobile-nav {
+    display: none; position: fixed; top: 78px; left: 0; right: 0;
+    background: rgba(10,22,40,0.97); backdrop-filter: blur(20px);
+    padding: 20px 5%; z-index: 999;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column; gap: 16px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+  /* ───── RESPONSIVE ───── */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .why-grid { grid-template-columns: 1fr; }
+    .why-image { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps::before { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-stats { gap: 24px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-ghost { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/918425007173" target="_blank" class="float-wa" title="Chat on WhatsApp">💬</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="logo">
+    <div class="logo-icon">❄️</div>
+    <div>
+      <div class="logo-text">Technician Power</div>
+      <span class="logo-sub">AC Services</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book Service</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="toggleMenu()">🏠 Home</a>
+  <a href="#services" onclick="toggleMenu()">🔧 Services</a>
+  <a href="#brands" onclick="toggleMenu()">🏷️ Brands We Service</a>
+  <a href="#process" onclick="toggleMenu()">⚙️ Our Process</a>
+  <a href="#pricing" onclick="toggleMenu()">💰 Pricing</a>
+  <a href="#testimonials" onclick="toggleMenu()">⭐ Reviews</a>
+  <a href="#contact" onclick="toggleMenu()">📞 Contact</a>
+</div>
+
+<!-- PAGE 1: HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid container">
+    <div>
+      <div class="hero-badge">Mumbai's Trusted AC Experts</div>
+      <h1>Stay <em>Cool</em><br>Year <span>Round</span></h1>
+      <p class="hero-desc">Expert AC installation, repair, service & maintenance across Mumbai. Fast response, genuine parts, 100% satisfaction guaranteed.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">📅 Book a Service</a>
+        <a href="tel:+918425007173" class="btn-ghost">📞 Call Now</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">5K+</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ac-unit">
+        <div class="cold-air">
+          <div class="air-wave"></div>
+          <div class="air-wave"></div>
+          <div class="air-wave"></div>
+          <div class="air-wave"></div>
+          <div class="air-wave"></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-vents">
+            <div class="ac-vent"></div>
+            <div class="ac-vent"></div>
+            <div class="ac-vent"></div>
+            <div class="ac-vent"></div>
+            <div class="ac-vent"></div>
+          </div>
+          <div class="ac-display">
+            <div>
+              <div class="ac-temp">22°C</div>
+              <div class="ac-mode">Cool Mode · Auto</div>
+            </div>
+            <div class="ac-power">⏻</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">What We Do</div>
+      <h2>Our AC <em>Services</em></h2>
+      <p class="section-sub">Comprehensive air conditioning solutions for homes and offices across Mumbai.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🧊</div>
+        <h3>AC Installation</h3>
+        <p>Professional installation of split, window, cassette, and ducted ACs. We handle all brands with precision mounting and gas charging.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>AC Repair</h3>
+        <p>Quick diagnosis and repair for all AC faults — cooling issues, compressor failure, PCB problems, water leakage, and more.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🧼</div>
+        <h3>Deep Cleaning & Servicing</h3>
+        <p>Thorough cleaning of filters, coils, drain pans, and blowers using high-pressure wash for optimal performance and air quality.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔩</div>
+        <h3>Gas Refilling (Re-gassing)</h3>
+        <p>Genuine refrigerant refill (R22, R32, R410A) with leak testing to restore your AC's cooling capacity fully.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>AMC (Annual Maintenance)</h3>
+        <p>Yearly contracts with scheduled service visits, priority support, and discounts on parts — best value for long-term care.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Commercial AC Services</h3>
+        <p>Centralized AC, cassette units, floor-standing, and VRF/VRV system maintenance for offices, restaurants, and retail spaces.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <h3>AC Uninstallation & Shifting</h3>
+        <p>Safe removal, transport-ready packing, and reinstallation at your new location — including gas recovery and re-gassing.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛡️</div>
+        <h3>Warranty Repairs</h3>
+        <p>Authorized servicing and warranty-claim assistance for most major brands. We document everything and handle the paperwork.</p>
+        <a href="#contact" class="service-link">Book Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-image">❄️</div>
+      <div>
+        <div class="section-tag">Why Choose Us</div>
+        <h2>Mumbai's <em>Most Trusted</em> AC Team</h2>
+        <div class="why-points" style="margin-top:32px;">
+          <div class="why-point">
+            <div class="why-num">01</div>
+            <div>
+              <h4>Certified Technicians</h4>
+              <p>Our team holds industry certifications and undergoes regular training on the latest AC technologies and refrigerants.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">02</div>
+            <div>
+              <h4>Same-Day Service</h4>
+              <p>Book before noon and get a technician at your doorstep the same day — no waiting for days in the Mumbai heat.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">03</div>
+            <div>
+              <h4>Transparent Pricing</h4>
+              <p>No hidden charges. You get a full quote before any work begins. Pay only what was agreed, nothing more.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">04</div>
+            <div>
+              <h4>Service Guarantee</h4>
+              <p>All repairs come with a 30-day service guarantee. If the issue recurs, we fix it at zero additional cost.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">05</div>
+            <div>
+              <h4>Genuine Spare Parts</h4>
+              <p>We use only OEM or certified-quality spare parts, ensuring longevity and maintaining your AC's warranty status.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: BRANDS -->
+<section id="brands">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Brands We Service</div>
+      <h2>All Major <em>Brands</em></h2>
+      <p class="section-sub">We service and repair all leading air conditioner brands available in India.</p>
+    </div>
+    <div class="brands-strip">
+      <div class="brand-pill">❄️ Daikin</div>
+      <div class="brand-pill">🌀 Voltas</div>
+      <div class="brand-pill">⚡ LG</div>
+      <div class="brand-pill">🔵 Samsung</div>
+      <div class="brand-pill">🌊 Blue Star</div>
+      <div class="brand-pill">💨 Carrier</div>
+      <div class="brand-pill">🟠 Hitachi</div>
+      <div class="brand-pill">🏔️ Lloyd</div>
+      <div class="brand-pill">🟢 O'General</div>
+      <div class="brand-pill">🔷 Haier</div>
+      <div class="brand-pill">⭕ Panasonic</div>
+      <div class="brand-pill">🔴 Whirlpool</div>
+      <div class="brand-pill">💙 Godrej</div>
+      <div class="brand-pill">🟡 Mitsubishi</div>
+      <div class="brand-pill">🌐 Toshiba</div>
+      <div class="brand-pill">♻️ Midea</div>
+    </div>
+    <p style="text-align:center;color:var(--grey);font-size:14px;margin-top:24px;">Don't see your brand? <a href="#contact" style="color:var(--sky);">Contact us</a> — we likely service it too!</p>
+  </div>
+</section>
+
+<!-- PAGE 5: PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">How It Works</div>
+      <h2>Simple <em>4-Step</em> Process</h2>
+      <p class="section-sub">Getting your AC serviced is quick and hassle-free with Technician Power.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Book Online or Call</h4>
+        <p>Fill the contact form or call/WhatsApp us. Tell us your AC issue and preferred time slot.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Technician Assigned</h4>
+        <p>A certified technician is assigned immediately and you receive a confirmation with their details.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Diagnosis & Quote</h4>
+        <p>The technician diagnoses the problem and gives you a transparent quote before starting any work.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Service Done ✓</h4>
+        <p>Work completed, tested, and verified. You get a service report and enjoy cool comfort again!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6: TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Customer Reviews</div>
+      <h2>What <em>Mumbaikars</em> Say</h2>
+      <p class="section-sub">Real feedback from real customers across Mumbai.</p>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"My AC had stopped cooling completely in peak summer. The technician arrived within 2 hours, identified a gas leak, and fixed it same day. Excellent service!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div>
+            <div class="author-name">Ramesh Kulkarni</div>
+            <div class="author-loc">Govandi, Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Took the AMC package for my office with 4 ACs. The team is very professional, always on time, and the ACs have been running perfectly since. Highly recommend!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PS</div>
+          <div>
+            <div class="author-name">Priya Sharma</div>
+            <div class="author-loc">Chembur, Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Very reasonable pricing compared to other services I've tried. The deep cleaning service made my AC work like new again. Great job, will book again!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AM</div>
+          <div>
+            <div class="author-name">Anand Mishra</div>
+            <div class="author-loc">Kurla, Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I needed my AC shifted during home renovation. They handled everything — uninstallation, reinstallation, and gas refill — smoothly and at a fair price."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SN</div>
+          <div>
+            <div class="author-name">Sunita Nair</div>
+            <div class="author-loc">Ghatkopar, Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Superb response time! WhatsApp booking is very convenient. The technician was knowledgeable and explained everything clearly before starting the repair."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">VD</div>
+          <div>
+            <div class="author-name">Vijay Desai</div>
+            <div class="author-loc">Mankhurd, Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Genuinely honest service — they told me I only needed a cleaning, not a full repair as another company had suggested. Saved me a lot of money. Trust these guys!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">FK</div>
+          <div>
+            <div class="author-name">Farida Khan</div>
+            <div class="author-loc">Shivaji Nagar, Mumbai</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 7: PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Pricing Plans</div>
+      <h2>Affordable <em>Service</em> Plans</h2>
+      <p class="section-sub">Transparent pricing — no surprises. All prices inclusive of labour. Parts if required are quoted separately.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="plan-name">Basic</div>
+        <div class="plan-price"><sup>₹</sup>499<small>/visit</small></div>
+        <ul class="plan-features">
+          <li>AC Filter Cleaning</li>
+          <li>General Check-up</li>
+          <li>Performance Testing</li>
+          <li>Basic Troubleshooting</li>
+          <li>1 AC Unit</li>
+        </ul>
+        <a href="#contact" class="btn-plan">Book Basic</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="popular-badge">Most Popular</div>
+        <div class="plan-name">Standard</div>
+        <div class="plan-price"><sup>₹</sup>999<small>/visit</small></div>
+        <ul class="plan-features">
+          <li>Deep Cleaning (Indoor + Outdoor)</li>
+          <li>Gas Pressure Check</li>
+          <li>Drain Cleaning</li>
+          <li>Electrical Check</li>
+          <li>Cooling Optimization</li>
+          <li>30-Day Service Guarantee</li>
+        </ul>
+        <a href="#contact" class="btn-plan filled">Book Standard</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="plan-name">AMC Annual</div>
+        <div class="plan-price"><sup>₹</sup>1999<small>/year</small></div>
+        <ul class="plan-features">
+          <li>2 Full Service Visits/Year</li>
+          <li>Priority Emergency Response</li>
+          <li>Free Labour on Repairs</li>
+          <li>10% Off on Parts</li>
+          <li>Performance Reports</li>
+          <li>Year-Round Peace of Mind</li>
+        </ul>
+        <a href="#contact" class="btn-plan">Book AMC</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--grey);font-size:13px;margin-top:30px;">* Gas refilling, spare parts and installation charges are quoted separately after inspection. Final price shared before work begins.</p>
+  </div>
+</section>
+
+<!-- PAGE 8: CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Get In Touch</div>
+      <h2>Book A <em>Service</em> Now</h2>
+      <p class="section-sub">Fill the form and we'll connect you instantly via WhatsApp.</p>
+    </div>
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h3>Technician<br>Power</h3>
+        <p>Your trusted AC service partner in Mumbai. Available 7 days a week for all your air conditioning needs.</p>
+        <div class="info-items">
+          <div class="info-item">
+            <div class="info-ico">📞</div>
+            <div>
+              <strong>Phone / WhatsApp</strong>
+              <span><a href="tel:+918425007173">+91 84250 07173</a></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-ico">✉️</div>
+            <div>
+              <strong>Email</strong>
+              <span><a href="mailto:technicianpower01@gmail.com">technicianpower01@gmail.com</a></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-ico">📍</div>
+            <div>
+              <strong>Address</strong>
+              <span>Near Madina Masjid, Plot No. 1, Road No. 1,<br>Govandi West, Phase 1, Shivaji Nagar,<br>Mumbai, Maharashtra – 400043</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-ico">⏰</div>
+            <div>
+              <strong>Working Hours</strong>
+              <span>Mon–Sun: 8:00 AM – 9:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" id="fname" placeholder="Ramesh Kumar" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="fphone" placeholder="+91 98765 43210" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="femail" placeholder="you@example.com">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Service Required *</label>
+            <select id="fservice">
+              <option value="">Select Service</option>
+              <option>AC Installation</option>
+              <option>AC Repair</option>
+              <option>Deep Cleaning / Servicing</option>
+              <option>Gas Refilling</option>
+              <option>Annual Maintenance Contract</option>
+              <option>Commercial AC Service</option>
+              <option>AC Shifting / Uninstallation</option>
+              <option>Warranty Repair</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>AC Brand</label>
+            <select id="fbrand">
+              <option value="">Select Brand</option>
+              <option>Daikin</option>
+              <option>Voltas</option>
+              <option>LG</option>
+              <option>Samsung</option>
+              <option>Blue Star</option>
+              <option>Carrier</option>
+              <option>Hitachi</option>
+              <option>Lloyd</option>
+              <option>O'General</option>
+              <option>Panasonic</option>
+              <option>Haier</option>
+              <option>Whirlpool</option>
+              <option>Godrej</option>
+              <option>Mitsubishi</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Your Area / Address</label>
+          <input type="text" id="faddress" placeholder="Flat No, Building, Area, Mumbai">
+        </div>
+        <div class="form-group">
+          <label>Describe Your Issue</label>
+          <textarea id="fmessage" placeholder="E.g. AC not cooling, water leaking, strange noise..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="sendToWhatsApp()">
+          <span>💬</span> Send via WhatsApp
+        </button>
+        <p class="wa-note">Clicking the button opens <span>WhatsApp</span> with your details pre-filled. We'll respond within minutes!</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#home" class="logo" style="text-decoration:none">
+          <div class="logo-icon">❄️</div>
+          <div>
+            <div class="logo-text">Technician Power</div>
+            <span class="logo-sub">AC Services</span>
+          </div>
+        </a>
+        <p>Mumbai's reliable AC service provider. Trusted by thousands of homes and offices across the city.</p>
+        <div class="social-links">
+          <a href="https://wa.me/918425007173" class="social-link" target="_blank">💬</a>
+          <a href="mailto:technicianpower01@gmail.com" class="social-link">✉️</a>
+          <a href="tel:+918425007173" class="social-link">📞</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">AC Installation</a></li>
+          <li><a href="#services">AC Repair</a></li>
+          <li><a href="#services">Deep Cleaning</a></li>
+          <li><a href="#services">Gas Refilling</a></li>
+          <li><a href="#services">AMC Plans</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#why">Why Choose Us</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+918425007173">📞 84250 07173</a></li>
+          <li><a href="https://wa.me/918425007173">💬 WhatsApp</a></li>
+          <li><a href="mailto:technicianpower01@gmail.com">✉️ Gmail</a></li>
+          <li><a href="#contact">📍 Govandi, Mumbai</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Technician Power. All rights reserved. Mumbai, Maharashtra.</p>
+      <p style="color:var(--grey);font-size:12px;">Built with ❤️ for Mumbai's comfort</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.toggle('open');
+  }
+
+  // WhatsApp form submission
+  function sendToWhatsApp() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const service = document.getElementById('fservice').value;
+    const brand = document.getElementById('fbrand').value;
+    const address = document.getElementById('faddress').value.trim();
+    const message = document.getElementById('fmessage').value.trim();
+
+    if (!name) { alert('Please enter your name.'); return; }
+    if (!phone) { alert('Please enter your phone number.'); return; }
+    if (!service) { alert('Please select a service.'); return; }
+
+    const text = `🔧 *New Service Request – Technician Power*\n\n` +
+      `👤 *Name:* ${name}\n` +
+      `📞 *Phone:* ${phone}\n` +
+      (email ? `✉️ *Email:* ${email}\n` : '') +
+      `🛠️ *Service:* ${service}\n` +
+      (brand ? `❄️ *AC Brand:* ${brand}\n` : '') +
+      (address ? `📍 *Address:* ${address}\n` : '') +
+      (message ? `\n📝 *Issue Details:*\n${message}\n` : '') +
+      `\n_Sent via Technician Power Website_`;
+
+    const waNumber = '918425007173';
+    const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+    window.open(waURL, '_blank');
+  }
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.querySelector(a.getAttribute('href'));
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Scroll fade-in for cards
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .testimonial-card, .pricing-card, .step, .why-point').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
